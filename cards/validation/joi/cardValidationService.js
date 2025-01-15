@@ -1,0 +1,16 @@
+const Joi = require("joi");
+const joiValidateCard = require("./joiValidationCard");
+const config = require("config");
+
+// const validator = Joi;
+const validator = config.get("VALIDATOR");
+
+const validateCard = (card) => {
+  if (validator === "Joi") {
+    const { error } = joiValidateCard(card);
+    if (error) return error.details[0].message;
+    return "";
+  }
+};
+
+module.exports = validateCard;
